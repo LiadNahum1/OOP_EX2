@@ -7,6 +7,4 @@ public interface IPolynomial {
 	IPolynomial derivate();
 	String toString();
 	boolean equals(IPolynomial poly);
-	
-	
 }

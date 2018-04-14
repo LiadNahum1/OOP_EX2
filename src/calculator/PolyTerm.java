@@ -1,18 +1,40 @@
 package calculator;
 
-public class PolyTerm implements IPolyTerm{
+public class PolyTerm {
 
-	public boolean canAdd(IPolyTerm pt) {
+	private Scalar scalar; 
+	private int exponent; 
+	public PolyTerm(Scalar scalar, int exponent) {
+		this.scalar = scalar;
+		this.exponent = exponent; 
+	}
+	
+	public Scalar getScalar() {
+		return null;
+	}
+	
+	public int getExponent() {
+		return 0;
+	}
+	
+	public void setScalar(Scalar s) {
+		
+	}
+	
+	public void setExponent(int exponent) {
+		
+	}
+	public boolean canAdd(PolyTerm pt) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public IPolyTerm add(IPolyTerm pt) {
+	public PolyTerm add(PolyTerm pt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public IPolyTerm mul(IPolyTerm pt) {
+	public PolyTerm mul(PolyTerm pt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -22,14 +44,16 @@ public class PolyTerm implements IPolyTerm{
 		return null;
 	}
 
-	public IPolyTerm derivate() {
+	public PolyTerm derivate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean equals(IPolyTerm pt) {
+	public boolean equals(PolyTerm pt) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 }

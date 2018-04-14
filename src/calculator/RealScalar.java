@@ -2,6 +2,10 @@ package calculator;
 
 /*The class implements Scalar for Real numbers*/
 public class RealScalar implements Scalar{
+	private double value; 
+	public RealScalar(double value) {
+		this.value = value; 
+	}
 
 	public Scalar add(Scalar s) {
 		// TODO Auto-generated method stub
