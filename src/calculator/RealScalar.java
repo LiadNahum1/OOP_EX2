@@ -7,30 +7,52 @@ public class RealScalar implements Scalar{
 		this.value = value; 
 	}
 
+	/*return value of scalar*/
+	public double getValue() {
+		return this.value; 
+	}
+	
+	public void setValue(double value) {
+		this.value = value;
+	}
+	
+	/*accepts a scalar argument and returns a scalar which is the sum of the current scalar and the argument*/ 
 	public Scalar add(Scalar s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new RealScalar(getValue() + ((RealScalar)s).getValue());
 	}
-
+	/*accepts a scalar argument and returns a scalar which is the multiplication of the current scalar and
+	 * the argument*/ 
 	public Scalar mul(Scalar s) {
-		// TODO Auto-generated method stub
-		return null;
+		return new RealScalar(getValue() * ((RealScalar)s).getValue());
 	}
 
+	/*returns a scalar which is the result of the multiplying the current scalar by (-1)*/
 	public Scalar neg() {
-		// TODO Auto-generated method stub
-		return null;
+		return mul(new RealScalar(-1));
 	}
 
-
+	/*returns (1/scalar)*/
 	public Scalar inv() {
-		// TODO Auto-generated method stub
-		return null;
+		if(getValue() != 0.0) {
+			return new RealScalar(1/getValue());
+		}
+		else
+			throw new IllegalArgumentException();
 	}
 
+	/*returns true if the argument Scalar and the current Scalar have the same numeric value*/
 	public boolean equals(Scalar s) {
-		// TODO Auto-generated method stub
-		return false;
+		if(getValue() == ((RealScalar)s).getValue())
+			return true;
+		return false; 
+	}
+	
+	/* Real numbers are printed up to 3 digits*/ 
+	public String toString() {
+		double value = getValue();
+		int round = (int)(value* 1000);
+		value = ((double)round)/1000; 
+		return "" + value;
 	}
 
 }
