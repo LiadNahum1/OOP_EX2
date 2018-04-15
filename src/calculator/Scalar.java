@@ -5,7 +5,8 @@ public interface Scalar {
 	Scalar mul(Scalar s);
 	Scalar neg();
 	Scalar inv();
-	boolean equals(Scalar s); 
+	boolean equals(Scalar s);
+	int getNumber(); 
 	
 
 }

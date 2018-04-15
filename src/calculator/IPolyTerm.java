@@ -1,12 +1,12 @@
 package calculator;
 
 public interface IPolyTerm {
-	boolean canAdd(IPolyTerm pt);
-	IPolyTerm add(IPolyTerm pt);
-	IPolyTerm mul(IPolyTerm pt);
+	boolean canAdd(PolyTerm pt);
+	IPolyTerm add(PolyTerm pt);
+	IPolyTerm mul(PolyTerm pt);
 	Scalar evaluate(Scalar scalar);
 	IPolyTerm derivate();
-	boolean equals(IPolyTerm pt);
+	boolean equals(PolyTerm pt);
 	
 	
 }

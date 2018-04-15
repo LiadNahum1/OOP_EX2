@@ -2,6 +2,7 @@ package calculator;
 
 /*The class implements Scalar for Real numbers*/
 public class RealScalar implements Scalar{
+	int number;
 
 	public Scalar add(Scalar s) {
 		// TODO Auto-generated method stub
@@ -27,6 +28,9 @@ public class RealScalar implements Scalar{
 	public boolean equals(Scalar s) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public int getNumber() {
+		return number;
 	}
 
 }
