@@ -66,27 +66,27 @@ public class Polynomial  {
 		String scalar;
 		String exponent; 
 		if(poly.contains("x")) {
-			String[]splitPolyTerm = poly.split("x");
 			//The input is only "x" which means scalar == 1 and exponent == 1 
-			if(splitPolyTerm.length == 0) {
+			if(poly.length()==1) {
 				scalar = "1";
 				exponent = "1";
 			}
 			//The input is  kx which means exponent == 1
-			else if(splitPolyTerm.length == 1 ) {
-				scalar = splitPolyTerm[0];
+			else if(poly.charAt(poly.length()-1)== 'x') {
+				scalar = poly.substring(0, poly.length()-1);
 				exponent = "1";
 			}
 			//The input is x^k which means scalar == 1
 			else if(poly.charAt(0)=='x') {
 				scalar = "1";
-				exponent = splitPolyTerm[1].substring(1);
+				exponent = poly.substring(2);
 			}
 
 			//The input is px^k which means both scalar and exponent are explicitly written in the input  
 			else {
-				scalar = splitPolyTerm[0];
-				exponent = splitPolyTerm[1].substring(1);
+				int index = poly.indexOf('x');
+				scalar = poly.substring(0,index);;
+				exponent = poly.substring(index+2);
 			}
 		}
 
@@ -147,13 +147,14 @@ public class Polynomial  {
 					other.remove(otherTerm);
 				}
 			}
-			if(addToResult.getCoefficient().getValue()!=0)
-				result.addPolyTermToVector(addToResult);	
+			if(addToResult.getCoefficient().getValue()!=0) {
+				result.addPolyTermToVector(addToResult);
+			}
 		}
 		for(PolyTerm otherPoly: other) {
 			result.addPolyTermToVector(otherPoly);
 		}
-
+		
 		//the result is 0 
 		if(result.getPolyTerms().isEmpty()) {
 			Scalar zero; 

@@ -46,12 +46,12 @@ public class RationalScalar implements Scalar{
 	}
 	/*return value of scalar*/
 	public double getValue() {
-		return this.a/this.b; 
+		return ((double)this.a)/(this.b); 
 	}
 	
 	/*accepts a scalar argument and returns a scalar which is the sum of the current scalar and the argument*/ 
 	public Scalar add(Scalar s) {
-		return new RationalScalar(getA()*((RationalScalar)s).getB() + getB()*((RationalScalar)s).getA(), ((RationalScalar)s).getB());
+		return new RationalScalar(getA()*((RationalScalar)s).getB() + getB()*((RationalScalar)s).getA(), getB() * ((RationalScalar)s).getB());
 	}
 	/*accepts a scalar argument and returns a scalar which is the multiplication of the current scalar and
 	 * the argument*/ 
