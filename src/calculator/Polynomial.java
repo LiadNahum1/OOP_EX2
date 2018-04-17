@@ -71,14 +71,20 @@ public class Polynomial  {
 				}
 				else {
 					scalar = splitPolyTerm[0];
-					exponent = "1";
+					if(scalar == "0")
+						exponent = "0";
+					else
+						exponent = "1";
 				}
 			}
 					
 			//The input is px^k which means both scalar and exponent are explicitly written in the input  
 			else {
 				scalar = splitPolyTerm[0];
-				exponent = splitPolyTerm[1].substring(1);
+				if(scalar == "0")
+					exponent = "0";
+				else
+					exponent = splitPolyTerm[1].substring(1);
 			}
 		}
 		
@@ -208,6 +214,8 @@ public class Polynomial  {
 		for(PolyTerm pt : getPolyTerms()) {
 			str = str + pt.toString();
 		}
+		if(str=="")
+			str = "0";
 		return str; 
 	}
 	
