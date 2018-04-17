@@ -9,7 +9,7 @@ public class RealScalar implements Scalar{
 	public RealScalar(String scalarInput) { //assuming the scalar Input is valid 
 		if (scalarInput.contains("/")) {
 			String [] parts = scalarInput.split("/");
-			value = Integer.parseInt(parts[0])/Integer.parseInt(parts[1]);
+			value = Double.parseDouble(parts[0])/Double.parseDouble(parts[1]);
 		} 
 		else {
 		    value = Double.parseDouble(scalarInput);

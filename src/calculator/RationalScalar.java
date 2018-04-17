@@ -56,7 +56,7 @@ public class RationalScalar implements Scalar{
 	/*accepts a scalar argument and returns a scalar which is the multiplication of the current scalar and
 	 * the argument*/ 
 	public Scalar mul(Scalar s) {
-		return new RationalScalar(getA() * ((RationalScalar)s).getA(), ((RationalScalar)s).getB());
+		return new RationalScalar(getA() * ((RationalScalar)s).getA(), getB()*((RationalScalar)s).getB());
 	}
 
 	/*returns a scalar which is the result of the multiplying the current scalar by (-1)*/
