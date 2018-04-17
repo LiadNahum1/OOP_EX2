@@ -8,6 +8,7 @@ public class PolyTerm implements IPolyTerm{
 		this.coefficient = coefficient;
 		this.exponent = exponent;
 	}
+
 	public Scalar getCoefficient() {
 		return coefficient;
 	}
@@ -38,8 +39,12 @@ public class PolyTerm implements IPolyTerm{
 	}
 
 	public PolyTerm mul(PolyTerm pt) {
-		
-		return new PolyTerm (this.coefficient.mul(pt.getCoefficient()),this.exponent+pt.getExponent());
+		if(this.coefficient.mul(pt.getCoefficient()).toString().equals("0")) {
+			return new PolyTerm (this.coefficient.mul(pt.getCoefficient()),0);
+		}
+		else
+			return new PolyTerm (this.coefficient.mul(pt.getCoefficient()),this.exponent+pt.getExponent());
+			
 	}
 
 	public Scalar evaluate(Scalar scalar) {

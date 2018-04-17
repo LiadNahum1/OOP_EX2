@@ -61,10 +61,11 @@ public class RealScalar implements Scalar{
 		double value = getValue();
 		int round = (int)(value* 1000);
 		value = ((double)round)/1000; 
-		if (value >= 0)
+		if (value > 0)
 			return "+" + value;
-		else
-			return "" + value;
+		if(value < 0)
+			return "-" + value;
+		return "0"; 
 	}
 
 }
