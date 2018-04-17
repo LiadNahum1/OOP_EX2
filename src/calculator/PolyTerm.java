@@ -71,6 +71,8 @@ public class PolyTerm implements IPolyTerm{
 	}
 	@Override
 	public String toString() {
+		if(exponent == 0)
+			return coefficient.toString();
 		return coefficient.toString() + "X^" + this.exponent;
 	}
 

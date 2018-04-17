@@ -6,7 +6,13 @@ public class RealScalar implements Scalar{
 	public RealScalar(double value) {
 		this.value = value; 
 	}
-
+	public RealScalar(String InputScalar) {
+		if (InputScalar.contains("/")) {
+		    // Split it.
+		} else {
+		    throw new IllegalArgumentException("String " + string + " does not contain -");
+		}
+	}
 	/*return value of scalar*/
 	public double getValue() {
 		return this.value; 

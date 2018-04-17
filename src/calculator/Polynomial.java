@@ -28,7 +28,8 @@ public class Polynomial  {
 
 			//building Scalar instance according to whether the client chose Rational or Real
 			Scalar s = buildingScalar(scalar); 
-	
+			if (s.toString() == "0")
+			//	this.polyTerms.add(new PolyTerm(s, 0));
 			//building the PolyTerm
 			this.polyTerms.add(new PolyTerm(s, Integer.parseInt(exponent)));
 		}

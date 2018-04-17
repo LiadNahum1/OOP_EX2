@@ -14,6 +14,11 @@ public class RationalScalar implements Scalar{
 			throw new IllegalArgumentException(); 
 		}
 	}
+	public RationalScalar(String scalarInput) {
+		String [] parts = scalarInput.split("/");
+		this.a = Integer.parseInt(parts[0]);
+		this.b = Integer.parseInt(parts[1]);
+	}
 	
 	public int getA() {
 		return this.a; 
@@ -62,11 +67,11 @@ public class RationalScalar implements Scalar{
 	@Override
 	public String toString() {
 		String str = "";
-		if((getA() >= 0 & getB() > 0) || (getA() < 0 & getB() < 0)) //this checks if both A and B are positive or negative to know if the value of the expression is positive or negative
+		if((getA() > 0 & getB() > 0) || (getA() < 0 & getB() < 0)) //this checks if both A and B are positive or negative to know if the value of the expression is positive or negative
 			str = "+";
 		str = str + getA();
-		if(b!=1)
-			str = str + "/" + getB(); 
+		if(b!=1 & a!=0)
+			str = str + "/" + getB();
 		return str; 
 	}
 
