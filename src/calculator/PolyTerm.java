@@ -69,6 +69,10 @@ public class PolyTerm implements IPolyTerm{
 	public boolean equals(PolyTerm pt) {
 		return  this.exponent == pt.getExponent() & this.coefficient.equals(pt.getCoefficient()); 
 	}
-	
+	@Override
+	public String toString() {
+		return coefficient.toString() + "X^" + this.exponent;
+	}
+
 
 }

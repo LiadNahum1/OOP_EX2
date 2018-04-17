@@ -48,11 +48,15 @@ public class RealScalar implements Scalar{
 	}
 	
 	/* Real numbers are printed up to 3 digits*/ 
+	@Override
 	public String toString() {
 		double value = getValue();
 		int round = (int)(value* 1000);
 		value = ((double)round)/1000; 
-		return "" + value;
+		if (value >= 0)
+			return "+" + value;
+		else
+			return "" + value;
 	}
 
 }

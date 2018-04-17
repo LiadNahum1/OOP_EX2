@@ -7,6 +7,7 @@ public interface IPolyTerm {
 	Scalar evaluate(Scalar scalar);
 	PolyTerm derivate();
 	boolean equals(PolyTerm pt);
+	String toString();
 	
 	
 }

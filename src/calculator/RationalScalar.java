@@ -59,9 +59,12 @@ public class RationalScalar implements Scalar{
 			return true;
 		return false; 
 	}
-	
+	@Override
 	public String toString() {
-		String str = "" + getA();
+		String str = "";
+		if((getA() >= 0 & getB() > 0) || (getA() < 0 & getB() < 0)) //this checks if both A and B are positive or negative to know if the value of the expression is positive or negative
+			str = "+";
+		str = str + getA();
 		if(b!=1)
 			str = str + "/" + getB(); 
 		return str; 
