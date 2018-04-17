@@ -68,21 +68,19 @@ public class Polynomial  {
 		if(poly.contains("x")) {
 			String[]splitPolyTerm = poly.split("x");
 			//The input is only "x" which means scalar == 1 and exponent == 1 
-			if(splitPolyTerm[0].equals("") & splitPolyTerm[1].equals("")) {
+			if(splitPolyTerm.length == 0) {
 				scalar = "1";
 				exponent = "1";
 			}
-			//The input is x^k or kx wich means scalar == 1 or exponent == 1 
-			else if(splitPolyTerm[0].equals("")| splitPolyTerm[1].equals("") ) {
-				if(poly.charAt(0)== 'x') {
-					//if true then scalar == 1 
-					scalar = "1";
-					exponent = splitPolyTerm[1].substring(1);
-				}
-				else {
-					scalar = splitPolyTerm[0];
-					exponent = "1";
-				}
+			//The input is  kx which means exponent == 1
+			else if(splitPolyTerm.length == 1 ) {
+				scalar = splitPolyTerm[0];
+				exponent = "1";
+			}
+			//The input is x^k which means scalar == 1
+			else if(poly.charAt(0)=='x') {
+				scalar = "1";
+				exponent = splitPolyTerm[1].substring(1);
 			}
 
 			//The input is px^k which means both scalar and exponent are explicitly written in the input  
@@ -103,20 +101,11 @@ public class Polynomial  {
 	private Scalar buildingScalar(String scalar) {
 		Scalar s;
 		if(this.isReal) {
-			if(scalar.contains("/")) {
-				s = new RealScalar(Double.parseDouble(scalar.split("/")[0])/Double.parseDouble(scalar.split("/")[1]));
-			}
-			else
-				s = new RealScalar(Double.parseDouble(scalar));			
+			s = new RealScalar(scalar);
 		}
 		else {
 			//Rational number
-			if(scalar.contains("/")) {
-				s = new RationalScalar(Integer.parseInt(scalar.split("/")[0]), Integer.parseInt(scalar.split("/")[1]));
-			}
-			else {
-				s= new RationalScalar(Integer.parseInt(scalar),1);
-			}
+			s= new RationalScalar(scalar);
 		}
 		return s; 
 	}
@@ -158,7 +147,7 @@ public class Polynomial  {
 					other.remove(otherTerm);
 				}
 			}
-			if(!addToResult.getCoefficient().toString().equals("0"))
+			if(addToResult.getCoefficient().getValue()!=0)
 				result.addPolyTermToVector(addToResult);	
 		}
 		for(PolyTerm otherPoly: other) {
@@ -185,7 +174,7 @@ public class Polynomial  {
 	public Polynomial mul(Polynomial poly) {
 		Polynomial result = new Polynomial(this.isReal);
 		Vector<Polynomial> polynomialToSum = new Vector<Polynomial>(); 
-		
+
 		for(PolyTerm pt: getPolyTerms()) {
 			Polynomial polynom = new Polynomial(this.isReal); 
 			for(PolyTerm ptOther: poly.getPolyTerms()) {
@@ -230,11 +219,13 @@ public class Polynomial  {
 	public String toString() {
 		String str = "";
 		for(PolyTerm pt : getPolyTerms()) {
+			if(pt.getCoefficient().getValue()>0) {
+				str= str + "+";
+			}
 			str = str + pt.toString();
 		}
-		if(str.charAt(0)=='+') {
-			str = str.substring(1);
-		}
+		if(str.charAt(0)=='+')
+			str= str.substring(1);
 		return str; 
 	}
 

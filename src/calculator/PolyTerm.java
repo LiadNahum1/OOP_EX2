@@ -44,41 +44,42 @@ public class PolyTerm implements IPolyTerm{
 		}
 		else
 			return new PolyTerm (this.coefficient.mul(pt.getCoefficient()),this.exponent+pt.getExponent());
-			
+
 	}
 
 	public Scalar evaluate(Scalar scalar) {
-		Scalar answer = scalar.inv().mul(scalar); //start the answer scalar at the value one in case the exponent is zero
+		Scalar answer = getCoefficient();
 		if(this.exponent >= 1) { //this will rise the scalar in the exponent
-		 answer = scalar.mul(scalar);
-		for(int i = 1 ; i < this.exponent ; i++) {
-			answer = scalar.mul(answer);
+			answer = getCoefficient().mul(scalar);
+			for(int i = 1 ; i < this.exponent ; i++) {
+				answer = scalar.mul(answer);
+			}
 		}
-		}
-		answer =  answer.mul(coefficient); 
 		return answer;
 	}
 
 	public PolyTerm derivate() {
-		Scalar newCoeff = this.coefficient.inv().add(coefficient);//start the new coefficient at zero in case the exponent is zero
+		Scalar newCoeff = getCoefficient().neg().add(coefficient);//start the new coefficient at zero in case the exponent is zero
 		if(this.exponent >= 1) { //this will rise the scalar in the exponent
-			 newCoeff = newCoeff.add(this.coefficient);//this will mul the coefficient in the exponent according to derivate lows
+			newCoeff = newCoeff.add(getCoefficient());//this will mul the coefficient in the exponent according to derivate lows
 			for(int i = 1 ; i < this.exponent ; i++) {
-				newCoeff = newCoeff.add(newCoeff);
+				newCoeff = newCoeff.add(getCoefficient());
 			}
 			return new PolyTerm (newCoeff , this.exponent - 1);
-			}
+		}
 		return new PolyTerm (newCoeff , 0);
 	}
 
 	public boolean equals(PolyTerm pt) {
-		return  this.exponent == pt.getExponent() & this.coefficient.equals(pt.getCoefficient()); 
+		return  this.exponent == pt.getExponent() & getCoefficient().equals(pt.getCoefficient()); 
 	}
 	@Override
 	public String toString() {
+		if(getCoefficient().getValue()==0)
+			return "";
 		if(exponent == 0)
 			return coefficient.toString();
-		return coefficient.toString() + "X^" + this.exponent;
+		return coefficient.toString() + "x^" + this.exponent;
 	}
 
 

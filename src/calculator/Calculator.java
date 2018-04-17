@@ -36,30 +36,30 @@ public class Calculator {
 			case "1":
 				System.out.println("You have selected addition");
 				System.out.println("Please insert the first polynomial");
-				firstInput = sc.nextLine();
+				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
 				System.out.println("Please insert the second polynomial");
-				secondInput =sc.nextLine();
+				secondInput =sc.nextLine().toLowerCase();
 				pl2 = new Polynomial (secondInput,isReal);
 				System.out.println("The solution is:" + pl1.add(pl2).toString());
 				break;
 			case "2":
 				System.out.println("You have selected addition");
 				System.out.println("Please insert the first polynomial");
-				firstInput = sc.nextLine();
+				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
 				System.out.println("Please insert the second polynomial");
-				secondInput =sc.nextLine();
+				secondInput =sc.nextLine().toLowerCase();
 				pl2= new Polynomial (secondInput,isReal);
 				System.out.println("The solution is:" + pl1.mul(pl2).toString());
 				break;
 			case "3":
 				System.out.println("You have selected evaluation"); //not finished case
 				System.out.println("Please insert the  polynomial");
-				firstInput = sc.nextLine();
+				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
 				System.out.println("Please insert the scalar");	
-				secondInput = sc.nextLine();
+				secondInput = sc.nextLine().toLowerCase();
 				if(isReal)
 					System.out.println("The solution is:" + pl1.evaluate(new RealScalar(secondInput)).toString());	  
 				else
@@ -68,7 +68,7 @@ public class Calculator {
 			case "4":
 				System.out.println("You have selected Derivate");
 				System.out.println("Please insert the polynomial");
-				firstInput = sc.nextLine();
+				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
 				System.out.println("The derivative polynomial is:" + pl1.derivate().toString());
 				break;

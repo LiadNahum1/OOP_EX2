@@ -11,13 +11,20 @@ public class RationalScalar implements Scalar{
 			this.b = b;
 		}
 		else {
+			System.out.println(a);
 			throw new IllegalArgumentException(); 
 		}
 	}
 	public RationalScalar(String scalarInput) {
-		String [] parts = scalarInput.split("/");
-		this.a = Integer.parseInt(parts[0]);
-		this.b = Integer.parseInt(parts[1]);
+		if(scalarInput.contains("/")) {
+			String [] parts = scalarInput.split("/");
+			this.a = Integer.parseInt(parts[0]);
+			this.b = Integer.parseInt(parts[1]);
+		}
+		else {
+			this.a = Integer.parseInt(scalarInput);
+			this.b = 1;
+		}
 	}
 	
 	public int getA() {
@@ -37,6 +44,10 @@ public class RationalScalar implements Scalar{
 			throw new IllegalArgumentException(); 
 		}
 	}
+	/*return value of scalar*/
+	public double getValue() {
+		return this.a/this.b; 
+	}
 	
 	/*accepts a scalar argument and returns a scalar which is the sum of the current scalar and the argument*/ 
 	public Scalar add(Scalar s) {
@@ -53,8 +64,10 @@ public class RationalScalar implements Scalar{
 		return mul(new RationalScalar(-1,1));
 	}
 
-	/*returns (1/scalar)*/
+	/*returns (1/scalar). assumes that inv of 0 is 0 */
 	public Scalar inv() {
+		if(getA()==0)
+			return this; 
 		return new RationalScalar(getB(), getA());
 	}
 
@@ -67,8 +80,8 @@ public class RationalScalar implements Scalar{
 	@Override
 	public String toString() {
 		String str = "";
-		if((getA() > 0 & getB() > 0) || (getA() < 0 & getB() < 0)) //this checks if both A and B are positive or negative to know if the value of the expression is positive or negative
-			str = "+";
+		if((getA() > 0 & getB() <0) || (getA() < 0 & getB() > 0)) //check if the expression is  negative
+			str = "-";
 		str = str + getA();
 		if(b!=1 & a!=0)
 			str = str + "/" + getB();
