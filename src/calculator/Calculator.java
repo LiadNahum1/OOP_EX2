@@ -56,10 +56,9 @@ public class Calculator {
 				System.out.println("Please insert the scalar");	
 				secondInput = sc.nextLine();
 				if(isReal)
-				{
-					  
-				}
-				System.out.println("the solution is:" + pl1.mul(pl2).toString());
+					System.out.println("the solution is:" + pl1.evaluate(new RealScalar(secondInput)).toString());	  
+				else
+					System.out.println("the solution is:" + pl1.evaluate(new RationalScalar(secondInput)).toString());
 				break;
 			case 4:
 				System.out.println("you have selected Derivate");

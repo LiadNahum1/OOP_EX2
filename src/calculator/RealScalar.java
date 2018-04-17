@@ -6,11 +6,13 @@ public class RealScalar implements Scalar{
 	public RealScalar(double value) {
 		this.value = value; 
 	}
-	public RealScalar(String InputScalar) {
-		if (InputScalar.contains("/")) {
-		    // Split it.
-		} else {
-		    throw new IllegalArgumentException("String " + string + " does not contain -");
+	public RealScalar(String scalarInput) { //assuming the scalar Input is valid 
+		if (scalarInput.contains("/")) {
+			String [] parts = scalarInput.split("/");
+			 value = Integer.parseInt(parts[0])/Integer.parseInt(parts[1]);
+		} 
+		else {
+		    value = Double.parseDouble(scalarInput);
 		}
 	}
 	/*return value of scalar*/
