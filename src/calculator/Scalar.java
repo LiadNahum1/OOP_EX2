@@ -6,7 +6,6 @@ public interface Scalar {
 	Scalar neg();
 	Scalar inv();
 	boolean equals(Scalar s); 
-	double getValue();
 	String toString();
 
 }

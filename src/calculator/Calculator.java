@@ -3,7 +3,6 @@ import java.io.Console;
 import java.util.Scanner;
 public class Calculator {
 	public static void main(String[] args) {
-		System.out.println("+-1".split("\\+")[0] + "+-1".split("\\+")[1]); 
 		boolean isReal;
 		String action,scalar;
 		Polynomial pl1,pl2;

@@ -44,11 +44,7 @@ public class RationalScalar implements Scalar{
 			throw new IllegalArgumentException(); 
 		}
 	}
-	/*return value of scalar*/
-	public double getValue() {
-		return ((double)this.a)/(this.b); 
-	}
-	
+
 	/*accepts a scalar argument and returns a scalar which is the sum of the current scalar and the argument*/ 
 	public Scalar add(Scalar s) {
 		return new RationalScalar(getA()*((RationalScalar)s).getB() + getB()*((RationalScalar)s).getA(), getB() * ((RationalScalar)s).getB());

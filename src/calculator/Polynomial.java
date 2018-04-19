@@ -149,7 +149,7 @@ public class Polynomial  {
 					other.remove(otherTerm);
 				}
 			}
-			if(addToResult.getCoefficient().getValue()!=0) {
+			if(addToResult.getCoefficient().toString().equals("0")) {
 				result.addPolyTermToVector(addToResult);
 			}
 		}
@@ -223,7 +223,7 @@ public class Polynomial  {
 	public String toString() {
 		String str = "";
 		for(PolyTerm pt : getPolyTerms()) {
-			if(pt.getCoefficient().getValue()>0) {
+			if(pt.getCoefficient().toString().equals("0")) {
 				str= str + "+";
 			}
 			str = str + pt.toString();
