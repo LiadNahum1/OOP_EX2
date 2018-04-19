@@ -26,7 +26,7 @@ public class Polynomial  {
 			String exponent = scalarAndExpo[1]; 
 			
 			//Do not add scalars that are 0 
-			if(!scalar.equals("0") | !scalar.equals("-0")) {
+			if(!scalar.equals("0") & !scalar.equals("-0")) {
 				//building Scalar instance according to whether the client chose Rational or Real
 				Scalar s = buildingScalar(scalar); 
 				//building the PolyTerm
@@ -149,7 +149,7 @@ public class Polynomial  {
 					other.remove(otherTerm);
 				}
 			}
-			if(addToResult.getCoefficient().toString().equals("0")) {
+			if(!addToResult.getCoefficient().toString().equals("0")) {
 				result.addPolyTermToVector(addToResult);
 			}
 		}
@@ -223,7 +223,7 @@ public class Polynomial  {
 	public String toString() {
 		String str = "";
 		for(PolyTerm pt : getPolyTerms()) {
-			if(pt.getCoefficient().toString().equals("0")) {
+			if(!pt.getCoefficient().toString().contains("-")) {
 				str= str + "+";
 			}
 			str = str + pt.toString();

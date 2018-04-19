@@ -44,7 +44,7 @@ public class Calculator {
 				System.out.println("The solution is:" + pl1.add(pl2).toString());
 				break;
 			case "2":
-				System.out.println("You have selected addition");
+				System.out.println("You have selected multiplication");
 				System.out.println("Please insert the first polynomial");
 				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
