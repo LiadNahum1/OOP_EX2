@@ -2,7 +2,7 @@ package calculator;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class Polynomial  {
+public class Polynomial  { //try
 	private Vector <PolyTerm> polyTerms;
 	private boolean isReal; 
 	private ExponentComparator comparator; 
