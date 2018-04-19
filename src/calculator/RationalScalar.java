@@ -80,8 +80,6 @@ public class RationalScalar implements Scalar{
 	@Override
 	public String toString() {
 		String str = "";
-		if((getA() > 0 & getB() <0) || (getA() < 0 & getB() > 0)) //check if the expression is  negative
-			str = "-";
 		str = str + getA();
 		if(b!=1 & a!=0)
 			str = str + "/" + getB();
