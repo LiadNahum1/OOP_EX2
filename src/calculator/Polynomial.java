@@ -71,12 +71,30 @@ public class Polynomial  {
 				scalar = "1";
 				exponent = "1";
 			}
+<<<<<<< HEAD
 			//The input is  kx which means exponent == 1
 			else if(poly.charAt(poly.length()-1)== 'x') {
 				scalar = poly.substring(0, poly.length()-1);
 				if(scalar.equals("-"))
 					scalar = scalar + "1"; 
 				exponent = "1";
+=======
+			
+			//The input is x^k or kx wich means scalar == 1 or exponent == 1 
+			if(splitPolyTerm.length == 1 ) {
+				if(poly.charAt(0)== 'x') {
+					//if true then scalar == 1 
+					scalar = "1";
+					exponent = splitPolyTerm[0];
+				}
+				else {
+					scalar = splitPolyTerm[0];
+					if(scalar == "0")
+						exponent = "0";
+					else
+						exponent = "1";
+				}
+>>>>>>> master
 			}
 			//The input is x^k which means scalar == 1
 			else if(poly.charAt(0)=='x') {
@@ -86,11 +104,19 @@ public class Polynomial  {
 
 			//The input is px^k which means both scalar and exponent are explicitly written in the input  
 			else {
+<<<<<<< HEAD
 				int index = poly.indexOf('x');
 				scalar = poly.substring(0,index);
 				if(scalar.equals("-"))
 					scalar = scalar + "1"; 
 				exponent = poly.substring(index+2);
+=======
+				scalar = splitPolyTerm[0];
+				if(scalar == "0")
+					exponent = "0";
+				else
+					exponent = splitPolyTerm[1].substring(1);
+>>>>>>> master
 			}
 		}
 		// the PolyTerm doesn't include x which means exponent = 0 
@@ -228,9 +254,14 @@ public class Polynomial  {
 			}
 			str = str + pt.toString();
 		}
+<<<<<<< HEAD
 		//remove + from start of the string 
 		if(str.charAt(0)=='+')
 			str= str.substring(1);
+=======
+		if(str=="")
+			str = "0";
+>>>>>>> master
 		return str; 
 	}
 
