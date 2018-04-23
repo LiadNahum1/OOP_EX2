@@ -1,4 +1,5 @@
-package calculator;
+package polinom;
+import scalar.*;
 
 public class PolyTerm implements IPolyTerm{
 	Scalar coefficient;

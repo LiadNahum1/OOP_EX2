@@ -1,4 +1,6 @@
 package calculator;
+import polinom.*;
+import scalar.*;
 import java.io.Console;
 import java.util.Scanner;
 public class Calculator {

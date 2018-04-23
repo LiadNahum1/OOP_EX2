@@ -1,4 +1,5 @@
-package calculator;
+package polinom;
+import scalar.*;
 
 public interface IPolynomial {
 	IPolynomial add(IPolynomial poly);

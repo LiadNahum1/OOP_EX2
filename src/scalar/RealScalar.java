@@ -1,4 +1,4 @@
-package calculator;
+package scalar;
 
 /*The class implements Scalar for Real numbers*/
 public class RealScalar implements Scalar{

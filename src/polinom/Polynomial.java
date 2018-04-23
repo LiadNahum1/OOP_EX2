@@ -1,4 +1,5 @@
-package calculator;
+package polinom;
+import scalar.*;
 import java.util.Iterator;
 import java.util.Vector;
 

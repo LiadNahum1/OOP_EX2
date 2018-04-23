@@ -1,5 +1,5 @@
-package calculator;
-
+package polinom;
+import scalar.*;
 public interface IPolyTerm {
 	boolean canAdd(PolyTerm pt);
 	PolyTerm add(PolyTerm pt);

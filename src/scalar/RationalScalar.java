@@ -1,4 +1,4 @@
-package calculator;
+package scalar;
 
 /*The class implements Scalar for Rational numbers*/
 public class RationalScalar implements Scalar{
