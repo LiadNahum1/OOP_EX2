@@ -2,10 +2,10 @@ package polynom;
 import scalar.*;
 
 public interface IPolynomial {
-	IPolynomial add(IPolynomial poly);
-	IPolynomial mul(IPolynomial poly);
+	Polynomial add(Polynomial poly);
+	Polynomial mul(Polynomial poly);
 	Scalar evaluate(Scalar scalar);
-	IPolynomial derivate();
+	Polynomial derivate();
 	String toString();
-	boolean equals(IPolynomial poly);
+	boolean equals(Polynomial poly);
 }

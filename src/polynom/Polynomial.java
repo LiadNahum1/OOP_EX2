@@ -3,7 +3,7 @@ import scalar.*;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class Polynomial  {
+public class Polynomial implements IPolynomial {
 	private Vector <PolyTerm> polyTerms;
 	private boolean isReal; 
 	private ExponentComparator comparator; 
@@ -172,6 +172,10 @@ public class Polynomial  {
 		for(PolyTerm otherPoly: other) {
 			result.addPolyTermToVector(otherPoly);
 		}
+		//if result is 0
+		if(result.getPolyTerms().isEmpty()) {
+			result = zeroPolynomial(); 
+		}
 		//sort
 		result.getPolyTerms().sort(this.comparator);
 		return result; 
@@ -202,6 +206,10 @@ public class Polynomial  {
 		while(iterator.hasNext()) {
 			result = result.add(iterator.next()); 
 		}
+		//if result is 0
+		if(result.getPolyTerms().isEmpty()) {
+			result = zeroPolynomial(); 
+		}
 		//sort
 		result.getPolyTerms().sort(this.comparator);
 		return result; 
@@ -222,6 +230,7 @@ public class Polynomial  {
 			//add only derivation that 
 			result.addPolyTermToVector(pt.derivate());
 		}
+		//if result is 0
 		if(result.getPolyTerms().isEmpty()) {
 			result = zeroPolynomial();
 		}

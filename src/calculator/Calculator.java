@@ -39,32 +39,32 @@ public class Calculator {
 			case "1":
 				System.out.println("You have selected: Addition");
 				System.out.println("Please insert the first polynomial");
-				try{
+				//try{
 					firstInput = sc.nextLine().toLowerCase();
 					pl1 = new Polynomial (firstInput,isReal);
 					System.out.println("Please insert the second polynomial");
 					secondInput =sc.nextLine().toLowerCase();
 					pl2 = new Polynomial (secondInput,isReal);
 					System.out.println("The solution is:\n" + pl1.add(pl2).toString());
-				}
-				catch(Exception e) {
-					System.out.println("You inserted invalid polynomial");
-				}
+				//}
+				//catch(Exception e) {
+				//	System.out.println("You inserted invalid polynomial");
+				//}
 				break;
 			case "2":
 				System.out.println("You have selected: Multiplication");
 				System.out.println("Please insert the first polynomial");
-			//	try {
+				try {
 					firstInput = sc.nextLine().toLowerCase();
 					pl1 = new Polynomial (firstInput,isReal);
 					System.out.println("Please insert the second polynomial");
 					secondInput =sc.nextLine().toLowerCase();
 					pl2= new Polynomial (secondInput,isReal);
 					System.out.println("The solution is:\n" + pl1.mul(pl2).toString());
-			//	}
-			//	catch(Exception e) {
-			//		System.out.println("You inserted invalid polynomial");
-			//	}
+				}
+				catch(Exception e) {
+					System.out.println("You inserted invalid polynomial");
+				}
 				break;
 			case "3":
 				System.out.println("You have selected: Evaluation"); 
