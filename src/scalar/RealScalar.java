@@ -3,10 +3,11 @@ package scalar;
 /*The class implements Scalar for Real numbers*/
 public class RealScalar implements Scalar{
 	private double value; 
+	/*constructor*/
 	public RealScalar(double value) {
 		this.value = value; 
 	}
-	public RealScalar(String scalarInput) { //assuming the scalar Input is valid 
+	public RealScalar(String scalarInput) { 
 		if (scalarInput.contains("/")) {
 			String [] parts = scalarInput.split("/");
 			value = Double.parseDouble(parts[0])/Double.parseDouble(parts[1]);
@@ -15,13 +16,13 @@ public class RealScalar implements Scalar{
 		    value = Double.parseDouble(scalarInput);
 		}
 	}
+	
 	public double getValue() {
 		return this.value;
 	}
 	public void setValue(double value) {
 		this.value = value;
 	}
-	
 	/*accepts a scalar argument and returns a scalar which is the sum of the current scalar and the argument*/ 
 	public Scalar add(Scalar s) {
 		return new RealScalar(getValue() + ((RealScalar)s).getValue());
@@ -31,13 +32,11 @@ public class RealScalar implements Scalar{
 	public Scalar mul(Scalar s) {
 		return new RealScalar(getValue() * ((RealScalar)s).getValue());
 	}
-
 	/*returns a scalar which is the result of the multiplying the current scalar by (-1)*/
 	public Scalar neg() {
 		return mul(new RealScalar(-1));
 	}
-
-	/*returns (1/scalar)*/
+	/*returns (1/scalar). assumes that 0 doesn't have inv so raise exception */
 	public Scalar inv() {
 		if(getValue() != 0.0) {
 			return new RealScalar(1/getValue());
@@ -45,20 +44,20 @@ public class RealScalar implements Scalar{
 		else
 			throw new IllegalArgumentException();
 	}
-
 	/*returns true if the argument Scalar and the current Scalar have the same numeric value*/
 	public boolean equals(Scalar s) {
 		if(getValue() == ((RealScalar)s).getValue())
 			return true;
 		return false; 
 	}
-	
 	/* Real numbers are printed up to 3 digits*/ 
 	@Override
 	public String toString() {
 		double value = getValue();
 		int round = (int)(value* 1000);
 		value = ((double)round)/1000; 
+		if((value - (int)value) == 0)
+			return "" + (int)value; 
 		return "" +value;
 	}
 

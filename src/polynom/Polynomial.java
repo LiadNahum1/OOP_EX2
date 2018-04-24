@@ -1,4 +1,4 @@
-package polinom;
+package polynom;
 import scalar.*;
 import java.util.Iterator;
 import java.util.Vector;
@@ -8,13 +8,12 @@ public class Polynomial  {
 	private boolean isReal; 
 	private ExponentComparator comparator; 
 
-	/*constructor*/
+	/*constructors*/
 	public Polynomial(boolean isReal) {
 		this.polyTerms = new Vector<PolyTerm>();
 		this.isReal = isReal; 
 		this.comparator = new ExponentComparator(); 
 	}
-
 	public Polynomial(String input, boolean isReal) { 
 		this.polyTerms = new Vector<PolyTerm>();
 		this.isReal = isReal; 
@@ -25,8 +24,8 @@ public class Polynomial  {
 			String [] scalarAndExpo = extractScalarAndExpo(splitInput[i]).split(" ");
 			String scalar = scalarAndExpo[0];
 			String exponent = scalarAndExpo[1]; 
-			
-			//Do not add scalars that are 0 
+
+			//Do not add PolyTerms that their scalars are 0 
 			if(!scalar.equals("0") & !scalar.equals("-0")) {
 				//building Scalar instance according to whether the client chose Rational or Real
 				Scalar s = buildingScalar(scalar); 
@@ -34,21 +33,14 @@ public class Polynomial  {
 				this.polyTerms.add(new PolyTerm(s, Integer.parseInt(exponent)));
 			}
 		}
-
 		//if the input includes only zeroes 
 		if(this.polyTerms.isEmpty()) {
-			Scalar onlyInVector; 
-			if(isReal) {
-				onlyInVector = new RealScalar(0);
-			}
-			else
-				onlyInVector = new RationalScalar(0,1);
-			this.polyTerms.add(new PolyTerm(onlyInVector, 0));
+			this.polyTerms = zeroPolynomial().getPolyTerms();
 		}
 		this.polyTerms.sort(this.comparator);
 	}
 
-	/*The function split the String data that describes Polynomial into string data that describes PolyTerms*/  
+	/*The function split the String data that describes Polynomial into String array that describes its PolyTerms */  
 	private String []splitIntoPolyTerms(String input){
 		//if there is "-" sign in string input we will add "+" before it so the program will be generic
 		for(int i=1; i< input.length(); i = i+1) {
@@ -62,7 +54,7 @@ public class Polynomial  {
 		return splitInput; 
 
 	}
-	/*The function returns a string includes the scalar and the exponent of the PolyTerm according to several situations*/ 
+	/*The function returns a String includes the scalar and the exponent of the PolyTerm according to several situations*/ 
 	private String extractScalarAndExpo(String poly) {
 		String scalar;
 		String exponent; 
@@ -72,7 +64,7 @@ public class Polynomial  {
 				scalar = "1";
 				exponent = "1";
 			}
-			//The input is  kx which means exponent == 1
+			//The input is kx which means exponent == 1
 			else if(poly.charAt(poly.length()-1)== 'x') {
 				scalar = poly.substring(0, poly.length()-1);
 				if(scalar.equals("-"))
@@ -101,10 +93,11 @@ public class Polynomial  {
 		}
 		return scalar + " " + exponent; 
 	}
-
+	/*The function crate a Scalar instance according to isReal value*/
 	private Scalar buildingScalar(String scalar) {
 		Scalar s;
 		if(this.isReal) {
+			//Real number
 			s = new RealScalar(scalar);
 		}
 		else {
@@ -113,7 +106,19 @@ public class Polynomial  {
 		}
 		return s; 
 	}
-
+	/*The function returns a polynomial that is 0*/
+	private Polynomial zeroPolynomial() {
+		Polynomial zero = new Polynomial(this.isReal);
+		Scalar onlyInVector; 
+		if(this.isReal) {
+			onlyInVector = new RealScalar(0);
+		}
+		else
+			onlyInVector = new RationalScalar(0,1);
+		zero.getPolyTerms().add(new PolyTerm(onlyInVector, 0));
+		return zero; 
+	}
+	/*getters and setters*/
 	public boolean getIsReal() {
 		return this.isReal;
 	}
@@ -127,14 +132,25 @@ public class Polynomial  {
 		this.polyTerms = ptList;
 		this.polyTerms.sort(this.comparator);
 	}
-	
+	/*The function add to Polynomial another PolyTerm and sort its PolyTerms vector
+	 * The function DO NOT add a Polyterm  that its scalar is zero*/
 	public void addPolyTermToVector(PolyTerm pt) {
-		this.polyTerms.add(pt);
-		this.polyTerms.sort(this.comparator);
+		if(!pt.getCoefficient().toString().equals("0")) {
+			this.polyTerms.add(pt);
+			this.polyTerms.sort(this.comparator);
+		}
 	}
-
-	/*receives a Polynomial and returns a Polynomial which is the sum of the current Polynomial with the argument*/
+	/*receives a Polynomial and returns a Polynomial which is the sum of the current Polynomial with the argument
+	 * assumes both Polynomials- current and argument- are valid therefore, when find a match between two PolyTerms
+	 * (we can add them) there is no another PolyTerm in argument that we can add to this PolyTerm of the current Polynomial*/
 	public Polynomial add(Polynomial poly) {
+		//if one of the Polynomial is 0 
+		if(equals(zeroPolynomial())) {
+			return poly; 
+		}
+		if(poly.equals(zeroPolynomial())) {
+			return this; 
+		}
 		Polynomial result = new Polynomial(this.isReal);
 		Vector<PolyTerm> other = poly.getPolyTerms(); 
 		Iterator<PolyTerm> currentPolyIt = getPolyTerms().iterator();
@@ -145,46 +161,40 @@ public class Polynomial  {
 			while(otherPolyIt.hasNext() & !isFound) {
 				PolyTerm otherTerm = otherPolyIt.next();
 				if(addToResult.canAdd(otherTerm)) {
-					addToResult = addToResult.add(otherTerm);
+					addToResult = addToResult.add(otherTerm); 
 					isFound = true;
 					other.remove(otherTerm);
 				}
 			}
-			if(!addToResult.getCoefficient().toString().equals("0")) {
-				result.addPolyTermToVector(addToResult);
-			}
+			result.addPolyTermToVector(addToResult);
 		}
+		//adding the argument's PolyTerms that couldn't be added with the current's PolyTerms
 		for(PolyTerm otherPoly: other) {
 			result.addPolyTermToVector(otherPoly);
 		}
-		
-		//the result is 0 
-		if(result.getPolyTerms().isEmpty()) {
-			Scalar zero; 
-			if(this.isReal)
-				zero = new RealScalar(0);
-			else
-				zero = new RationalScalar(0,1);
-			result.addPolyTermToVector(new PolyTerm(zero, 0));
-		}
-		else {
-			//sort
-			result.getPolyTerms().sort(this.comparator);
-		}
+		//sort
+		result.getPolyTerms().sort(this.comparator);
 		return result; 
 	}
-	/*receives a Polynomial and returns a Polynomial is the multiplication of the current Polynomial with the argument*/
+	/*receives a Polynomial and returns a Polynomial is the multiplication of the current Polynomial with the argument
+	 * The function multiples every PolyTerm in current Polynomial with all the PolyTerms of argument and create a polynomial
+	 * that includes all the PolyTerms that created in the multiplication. This is a valid Polynomial. Then do that to every PolyTerm of current
+	 * and then, sum up all the Polynomials that we have created into one Polynomial*/
 	public Polynomial mul(Polynomial poly) {
 		Polynomial result = new Polynomial(this.isReal);
+		//if one of the Polynomial is 0 
+		if(equals(zeroPolynomial())|poly.equals(zeroPolynomial())) {
+			return zeroPolynomial(); 
+		}
 		Vector<Polynomial> polynomialToSum = new Vector<Polynomial>(); 
-
 		for(PolyTerm pt: getPolyTerms()) {
 			Polynomial polynom = new Polynomial(this.isReal); 
 			for(PolyTerm ptOther: poly.getPolyTerms()) {
 				//in every polynomial that we create the PolyTerms are different in their exponents 
 				polynom.addPolyTermToVector(pt.mul(ptOther));
 			}
-			polynomialToSum.add(polynom);
+			if(!polynom.getPolyTerms().isEmpty())
+				polynomialToSum.add(polynom);
 		}
 
 		//sum up all the polynomial received from the multiple 
@@ -198,15 +208,8 @@ public class Polynomial  {
 	}
 	/*evaluates the polynomial using the argument scalar*/
 	public Scalar evaluate(Scalar scalar) {
-		Scalar result; 
 		//initialize the result 
-		if(this.isReal){
-			result = new RealScalar(0);
-		}
-		else {
-			result = new RationalScalar(0,1);
-		}
-		
+		Scalar result = buildingScalar("0"); 
 		for(PolyTerm pt: this.polyTerms) {
 			result = result.add(pt.evaluate(scalar)); 
 		}
@@ -216,11 +219,14 @@ public class Polynomial  {
 	public Polynomial derivate() {
 		Polynomial result = new Polynomial(this.isReal);
 		for(PolyTerm pt: getPolyTerms()) {
+			//add only derivation that 
 			result.addPolyTermToVector(pt.derivate());
+		}
+		if(result.getPolyTerms().isEmpty()) {
+			result = zeroPolynomial();
 		}
 		return result; 
 	}
-
 	public String toString() {
 		String str = "";
 		for(PolyTerm pt : getPolyTerms()) {
@@ -234,10 +240,8 @@ public class Polynomial  {
 			str= str.substring(1);
 		return str; 
 	}
-
 	/*returns true if the argument polynomial is equal to the current polynomial*/
 	public boolean equals(Polynomial poly) {
-		poly.getPolyTerms().sort(new ExponentComparator());
 		for(PolyTerm currentPt: getPolyTerms()) {
 			for(PolyTerm otherPt: poly.getPolyTerms()) {
 				if(!currentPt.equals(otherPt))

@@ -1,5 +1,5 @@
 package calculator;
-import polinom.*;
+import polynom.*;
 import scalar.*;
 import java.io.Console;
 import java.util.Scanner;
@@ -11,6 +11,7 @@ public class Calculator {
 		String firstInput,secondInput;
 		Scanner sc = new Scanner(System.in);
 		boolean toExit = false;
+
 		System.out.println("Welcome to the polynomial calculator." ); 
 		System.out.println("Please select the scalar field" );
 		System.out.println("Rational (Q) or Real (R)" );
@@ -36,46 +37,72 @@ public class Calculator {
 			action = sc.nextLine();
 			switch(action) {
 			case "1":
-				System.out.println("You have selected addition");
+				System.out.println("You have selected: Addition");
 				System.out.println("Please insert the first polynomial");
-				firstInput = sc.nextLine().toLowerCase();
-				pl1 = new Polynomial (firstInput,isReal);
-				System.out.println("Please insert the second polynomial");
-				secondInput =sc.nextLine().toLowerCase();
-				pl2 = new Polynomial (secondInput,isReal);
-				System.out.println("The solution is:" + pl1.add(pl2).toString());
+				try{
+					firstInput = sc.nextLine().toLowerCase();
+					pl1 = new Polynomial (firstInput,isReal);
+					System.out.println("Please insert the second polynomial");
+					secondInput =sc.nextLine().toLowerCase();
+					pl2 = new Polynomial (secondInput,isReal);
+					System.out.println("The solution is:\n" + pl1.add(pl2).toString());
+				}
+				catch(Exception e) {
+					System.out.println("You inserted invalid polynomial");
+				}
 				break;
 			case "2":
-				System.out.println("You have selected multiplication");
+				System.out.println("You have selected: Multiplication");
 				System.out.println("Please insert the first polynomial");
-				firstInput = sc.nextLine().toLowerCase();
-				pl1 = new Polynomial (firstInput,isReal);
-				System.out.println("Please insert the second polynomial");
-				secondInput =sc.nextLine().toLowerCase();
-				pl2= new Polynomial (secondInput,isReal);
-				System.out.println("The solution is:" + pl1.mul(pl2).toString());
+			//	try {
+					firstInput = sc.nextLine().toLowerCase();
+					pl1 = new Polynomial (firstInput,isReal);
+					System.out.println("Please insert the second polynomial");
+					secondInput =sc.nextLine().toLowerCase();
+					pl2= new Polynomial (secondInput,isReal);
+					System.out.println("The solution is:\n" + pl1.mul(pl2).toString());
+			//	}
+			//	catch(Exception e) {
+			//		System.out.println("You inserted invalid polynomial");
+			//	}
 				break;
 			case "3":
-				System.out.println("You have selected evaluation"); //not finished case
+				System.out.println("You have selected: Evaluation"); 
 				System.out.println("Please insert the  polynomial");
-				firstInput = sc.nextLine().toLowerCase();
-				pl1 = new Polynomial (firstInput,isReal);
-				System.out.println("Please insert the scalar");	
-				secondInput = sc.nextLine().toLowerCase();
-				if(isReal)
-					System.out.println("The solution is:" + pl1.evaluate(new RealScalar(secondInput)).toString());	  
-				else
-					System.out.println("The solution is:" + pl1.evaluate(new RationalScalar(secondInput)).toString());
+				try {
+					firstInput = sc.nextLine().toLowerCase();
+					pl1 = new Polynomial (firstInput,isReal);
+					System.out.println("Please insert the scalar");	
+					secondInput = sc.nextLine().toLowerCase();
+					try {
+						if(isReal)
+							System.out.println("The solution is:\n" + pl1.evaluate(new RealScalar(secondInput)).toString());	  
+						else
+							System.out.println("The solution is:\n" + pl1.evaluate(new RationalScalar(secondInput)).toString());
+					}
+					catch(Exception e) {
+						System.out.println("You inserted invalid scalar");
+					}
+				}
+				catch(Exception e) {
+					System.out.println("You inserted invalid polynomial");
+				}
 				break;
 			case "4":
-				System.out.println("You have selected Derivate");
+				System.out.println("You have selected: Derivate");
 				System.out.println("Please insert the polynomial");
+				try {
 				firstInput = sc.nextLine().toLowerCase();
 				pl1 = new Polynomial (firstInput,isReal);
 				System.out.println("The derivative polynomial is:" + pl1.derivate().toString());
+				}
+				catch(Exception e) {
+					System.out.println("You inserted invalid polynomial");
+				}
 				break;
 			case "5":
 				System.out.println("You chose to exit");
+				System.out.println("bye bye");
 				toExit = true;
 				break;
 			default:

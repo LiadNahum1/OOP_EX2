@@ -1,4 +1,4 @@
-package polinom;
+package polynom;
 import scalar.*;
 public interface IPolyTerm {
 	boolean canAdd(PolyTerm pt);

@@ -1,4 +1,4 @@
-package polinom;
+package polynom;
 import java.util.Comparator;
 public class ExponentComparator implements Comparator<PolyTerm> {
 
